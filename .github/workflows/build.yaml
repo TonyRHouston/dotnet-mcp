@@ -1,24 +1,21 @@
 name: Build MCP Servers
-
 on:
-  push:
-    branches:
-      - main
-
+  workflow_dispatch: {}
 jobs:
   build-and-push-image:
     uses: ./.github/workflows/build-container.yaml
-
     strategy:
       matrix:
-        image_name: [ 'awesome-copilot', 'markdown-to-html', 'outlook-email', 'todo-list' ]
-
+        image_name:
+        - awesome-copilot
+        - markdown-to-html
+        - outlook-email
+        - todo-list
     permissions:
       contents: write
       packages: write
       attestations: write
       id-token: write
-
     with:
       image_name: ${{ matrix.image_name }}
       force: true
