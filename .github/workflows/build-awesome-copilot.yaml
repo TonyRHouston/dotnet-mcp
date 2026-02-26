@@ -1,24 +1,18 @@
 name: Build MCP Server - Awesome Copilot
-
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 * * * *' # Every hour at minute 0
-
+  workflow_dispatch: {}
 jobs:
   build-and-push-image-stdio:
     uses: ./.github/workflows/build-container.yaml
-
     strategy:
       matrix:
-        image_name: [ 'awesome-copilot' ]
-
+        image_name:
+        - awesome-copilot
     permissions:
       contents: write
       packages: write
       attestations: write
       id-token: write
-
     with:
       image_name: ${{ matrix.image_name }}
       force: false
